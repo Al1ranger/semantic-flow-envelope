@@ -247,7 +247,44 @@ def test_real_validator_callback_reacquires_and_rejects_opposite_labels():
     labels = [['NO', 'NO'], ['NO', 'NO']]
     assert ns['validator'](Returned(leader)) is False
     assert len(calls) == 3
+    labels = [['YES', 'YES'], ['YES', 'YES']]
+    assert ns['validator'](Returned(leader)) is False  # Same aggregate max-flow is not enough.
+    assert len(calls) == 4
     bad = copy.deepcopy(leader)
     bad['binding']['key'] = 'substitution'
     assert ns['validator'](Returned(bad)) is False
     assert ns['validator'](object()) is False
+
+
+@pytest.mark.parametrize('http,raw,status', [(404, b'not found', 'HTTP_ERROR'), (200, b'', 'SIZE_ERROR'),
+                                         (200, b'x' * 6001, 'SIZE_ERROR'), (200, b'\xff', 'ENCODING_ERROR')])
+def test_actual_acquisition_failures(http, raw, status):
+    spec, _ = source_row(fixture('reroute'))
+    ns = dict(NS, gl=SimpleNamespace(nondet=SimpleNamespace(web=SimpleNamespace(get=lambda url: SimpleNamespace(status=http, body=raw)))))
+    exec(compile(ast.Module(body=[n for n in TREE.body if isinstance(n, ast.FunctionDef)], type_ignores=[]), str(SOURCE), 'exec'), ns)
+    row = ns['fetch_source'](spec)
+    assert row['status'] == status
+    assert row['body'] == row['hash'] == ''
+    assert ns['source_ok'](spec, row) is False
+
+
+def test_post_consensus_revalidation_prevents_forged_evidence():
+    class Expected(Exception):
+        pass
+    analyze = copy.deepcopy(next(n for c in TREE.body if isinstance(c, ast.ClassDef) for n in c.body if isinstance(n, ast.FunctionDef) and n.name == 'analyze'))
+    analyze.decorator_list = []
+    spec, row = source_row(fixture('reroute'))
+    def forged_run(observe, validator):
+        record = observe()
+        record['source']['body'] = '{}'
+        return record
+    vm = SimpleNamespace(UserError=Expected, run_nondet_unsafe=forged_run)
+    gl = SimpleNamespace(message=SimpleNamespace(sender_address='creator', contract_address='contract'), vm=vm,
+                         nondet=SimpleNamespace(web=SimpleNamespace(get=lambda url: SimpleNamespace(status=200, body=fixture('reroute'))),
+                                                exec_prompt=lambda *args, **kwargs: {'matrix': [['YES', 'YES'], ['YES', 'NO']]}))
+    ns = dict(NS, gl=gl)
+    exec(compile(ast.Module(body=[n for n in TREE.body if isinstance(n, ast.FunctionDef)] + [analyze], type_ignores=[]), str(SOURCE), 'exec'), ns)
+    state = SimpleNamespace(snapshots={}, creator_counts={})
+    with pytest.raises(Expected, match='Invalid consensus report'):
+        ns['analyze'](state, 'forgery', COORD, spec['sha256'])
+    assert not state.snapshots and not state.creator_counts

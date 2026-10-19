@@ -1,0 +1,462 @@
+{
+  "network": "studionet",
+  "chain_id": 61999,
+  "signer": "0x7a413BB4AB62E31d62d4cD9efC8C8a8Dae37FB42",
+  "fixture_commit": "0709466f63e7c9d475ebeaf0b80c992a916cbb6b",
+  "transactions": [
+    {
+      "step": "deploy",
+      "verified": true,
+      "cli_arguments": [
+        "deploy",
+        "--contract",
+        "contracts/SemanticFlowEnvelope.py"
+      ],
+      "hash": "0xafedff74688c9f059cb50a11bad151e8d7b38bb4126efc5be6a0738591e56aa1",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "committed": true
+    },
+    {
+      "step": "analyze-reroute-v1",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "reroute-v1",
+        "Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json",
+        "a71fe5fec4e3faa8eb1afb9dfd9de67bb408bf92ece9ac1c0c2910cd012235d9"
+      ],
+      "hash": "0xee08f9a16e5b7f1478e4ca1951fca289d77b375f3d2a41aff649d64dbb58924c",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "committed": true
+    },
+    {
+      "step": "analyze-bottleneck-v1",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "bottleneck-v1",
+        "Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/bottleneck.json",
+        "a9d3835d28d616fe44d03df4d126832d824ad434ac0039b93a9f15060082edb3"
+      ],
+      "hash": "0x7b439dbc5a51505f6b6b975abf896165e67638a7c1dc1487644c1a99db08687d",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "committed": true
+    },
+    {
+      "step": "analyze-ambiguous-v1",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "ambiguous-v1",
+        "Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/ambiguous.json",
+        "b03fbcfa44bd17d239dcb3c256f38671665491ac5f730470543366b8a9a0910f"
+      ],
+      "hash": "0x78d6f7fea0fc8cd0a2f2f747f65c4674ca6c4a4ec801d7bdd5f34faca3b9bb90",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "committed": true
+    },
+    {
+      "step": "analyze-bad-source-v1",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "bad-source-v1",
+        "Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "hash": "0x1b1094fa2c1d3dc35a66533e5d746099c21b4e89feec571b3acbad86bf02b3be",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "ERROR",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error_matched": true,
+      "committed": false,
+      "diagnosis": "All-numeric CLI digest rejected as invalid source specification; not an acquisition proof"
+    },
+    {
+      "step": "analyze-bad-source-v2",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "bad-source-v2",
+        "Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json",
+        "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      ],
+      "hash": "0xbcb9be37637e3640e63549a644584a68360d7a8c3d62f9dd930877940bef133d",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "committed": true
+    },
+    {
+      "step": "replay-nonce",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "reroute-v1",
+        "Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json",
+        "a71fe5fec4e3faa8eb1afb9dfd9de67bb408bf92ece9ac1c0c2910cd012235d9"
+      ],
+      "hash": "0xa45c787c404d7d8105faf864caa480f4d9aa728fecddc6734226020a23878512",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "ERROR",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error_matched": true,
+      "committed": false
+    },
+    {
+      "step": "reject-mutable-source",
+      "verified": true,
+      "cli_arguments": [
+        "write",
+        "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "analyze",
+        "--args",
+        "mutable-source",
+        "Al1ranger/semantic-flow-envelope/main/examples/reroute.json",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "hash": "0x8c7c6f68684f1fdd624657d5f5585099b3bbbbb24c196d942883c0d5049d88ba",
+      "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+      "status": "FINALIZED",
+      "execution": "ERROR",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error_matched": true,
+      "committed": false
+    }
+  ],
+  "runs": {
+    "reroute-v1": {
+      "key": "4de1a2e132d36a666f5426814d4a10cc79851862e3ba9167f213ea44ad46c0d7",
+      "input_root": "1216ba7fd6c0e9329c4ac062d5f71842accefce84484328e08ea0fd88d1299b8",
+      "inputs": {
+        "contract": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "creator": "0x7a413BB4AB62E31d62d4cD9efC8C8a8Dae37FB42",
+        "nonce": "reroute-v1",
+        "policy": "semantic-flow-envelope-v1",
+        "source": {
+          "sha256": "a71fe5fec4e3faa8eb1afb9dfd9de67bb408bf92ece9ac1c0c2910cd012235d9",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json"
+        }
+      },
+      "output": {
+        "demand_total": 2,
+        "lower": {
+          "cut_capacity": 2,
+          "flow": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "source_side_demands": [],
+          "source_side_supplies": [],
+          "value": 2
+        },
+        "max_unserved": 0,
+        "min_unserved": 0,
+        "status": "TEXT_FEASIBLE",
+        "supply_total": 2,
+        "unit": "files",
+        "unknown_cells": [],
+        "upper": {
+          "cut_capacity": 2,
+          "flow": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ]
+          ],
+          "source_side_demands": [],
+          "source_side_supplies": [],
+          "value": 2
+        }
+      },
+      "report": {
+        "binding": {
+          "input_root": "1216ba7fd6c0e9329c4ac062d5f71842accefce84484328e08ea0fd88d1299b8",
+          "key": "4de1a2e132d36a666f5426814d4a10cc79851862e3ba9167f213ea44ad46c0d7",
+          "policy": "semantic-flow-envelope-v1"
+        },
+        "document_status": "READY",
+        "matrix": [
+          [
+            "YES",
+            "YES"
+          ],
+          [
+            "YES",
+            "NO"
+          ]
+        ],
+        "source": {
+          "body": "{\"schema\":\"semantic-flow-v1\",\"unit\":\"files\",\"supplies\":[{\"id\":\"flex\",\"quantity\":1,\"terms\":\"One file: either a PNG photograph or an SVG line diagram. Either format can be selected for this unit.\"},{\"id\":\"photo\",\"quantity\":1,\"terms\":\"One PNG photograph only. SVG diagrams are not offered.\"}],\"demands\":[{\"id\":\"need_photo\",\"quantity\":1,\"terms\":\"One PNG photograph.\"},{\"id\":\"need_diagram\",\"quantity\":1,\"terms\":\"One SVG line diagram.\"}]}\n",
+          "hash": "a71fe5fec4e3faa8eb1afb9dfd9de67bb408bf92ece9ac1c0c2910cd012235d9",
+          "http": 200,
+          "status": "OK",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json"
+        }
+      },
+      "root": "9b7c26b9b7f7f2645002ef19bf1bec5423156221c9dbff74635378440c6f26f5",
+      "verified": true
+    },
+    "bottleneck-v1": {
+      "key": "f46a98b7a761c46a33b50591de19367c9dd0d5d8a98785e82d65c6d235da25d1",
+      "input_root": "9e00f98fdb963ce21ebf3946d804d87a80335167532591c675c48cc3e8a8d93b",
+      "inputs": {
+        "contract": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "creator": "0x7a413BB4AB62E31d62d4cD9efC8C8a8Dae37FB42",
+        "nonce": "bottleneck-v1",
+        "policy": "semantic-flow-envelope-v1",
+        "source": {
+          "sha256": "a9d3835d28d616fe44d03df4d126832d824ad434ac0039b93a9f15060082edb3",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/bottleneck.json"
+        }
+      },
+      "output": {
+        "demand_total": 2,
+        "lower": {
+          "cut_capacity": 1,
+          "flow": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "source_side_demands": [
+            0
+          ],
+          "source_side_supplies": [
+            0,
+            1
+          ],
+          "value": 1
+        },
+        "max_unserved": 1,
+        "min_unserved": 1,
+        "status": "TEXT_INFEASIBLE",
+        "supply_total": 2,
+        "unit": "files",
+        "unknown_cells": [],
+        "upper": {
+          "cut_capacity": 1,
+          "flow": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "source_side_demands": [
+            0
+          ],
+          "source_side_supplies": [
+            0,
+            1
+          ],
+          "value": 1
+        }
+      },
+      "report": {
+        "binding": {
+          "input_root": "9e00f98fdb963ce21ebf3946d804d87a80335167532591c675c48cc3e8a8d93b",
+          "key": "f46a98b7a761c46a33b50591de19367c9dd0d5d8a98785e82d65c6d235da25d1",
+          "policy": "semantic-flow-envelope-v1"
+        },
+        "document_status": "READY",
+        "matrix": [
+          [
+            "YES",
+            "NO"
+          ],
+          [
+            "YES",
+            "NO"
+          ]
+        ],
+        "source": {
+          "body": "{\"schema\":\"semantic-flow-v1\",\"unit\":\"files\",\"supplies\":[{\"id\":\"photo_a\",\"quantity\":1,\"terms\":\"One PNG photograph only. No SVG files are offered.\"},{\"id\":\"photo_b\",\"quantity\":1,\"terms\":\"A single PNG photograph is offered; SVG diagrams are explicitly excluded.\"}],\"demands\":[{\"id\":\"need_photo\",\"quantity\":1,\"terms\":\"One PNG photograph.\"},{\"id\":\"need_diagram\",\"quantity\":1,\"terms\":\"One SVG line diagram.\"}]}\n",
+          "hash": "a9d3835d28d616fe44d03df4d126832d824ad434ac0039b93a9f15060082edb3",
+          "http": 200,
+          "status": "OK",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/bottleneck.json"
+        }
+      },
+      "root": "6e6cd2cbdee5132f444f14cb92c60e7a17afdeebadb6e6e2c32ee8bcb5b851b9",
+      "verified": true
+    },
+    "ambiguous-v1": {
+      "key": "e0f89be2938580eaf182295f1e24eea9493ea97627b8cfc320f0be837fa489fc",
+      "input_root": "f52f6a034e19554073ba9697f7f263cf5e527aaba6e2c2b37e90ca60ab3650a1",
+      "inputs": {
+        "contract": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "creator": "0x7a413BB4AB62E31d62d4cD9efC8C8a8Dae37FB42",
+        "nonce": "ambiguous-v1",
+        "policy": "semantic-flow-envelope-v1",
+        "source": {
+          "sha256": "b03fbcfa44bd17d239dcb3c256f38671665491ac5f730470543366b8a9a0910f",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/ambiguous.json"
+        }
+      },
+      "output": {
+        "demand_total": 1,
+        "lower": {
+          "cut_capacity": 0,
+          "flow": [
+            [
+              0
+            ]
+          ],
+          "source_side_demands": [],
+          "source_side_supplies": [
+            0
+          ],
+          "value": 0
+        },
+        "max_unserved": 1,
+        "min_unserved": 0,
+        "status": "AMBIGUOUS",
+        "supply_total": 1,
+        "unit": "files",
+        "unknown_cells": [
+          [
+            0,
+            0
+          ]
+        ],
+        "upper": {
+          "cut_capacity": 1,
+          "flow": [
+            [
+              1
+            ]
+          ],
+          "source_side_demands": [],
+          "source_side_supplies": [],
+          "value": 1
+        }
+      },
+      "report": {
+        "binding": {
+          "input_root": "f52f6a034e19554073ba9697f7f263cf5e527aaba6e2c2b37e90ca60ab3650a1",
+          "key": "e0f89be2938580eaf182295f1e24eea9493ea97627b8cfc320f0be837fa489fc",
+          "policy": "semantic-flow-envelope-v1"
+        },
+        "document_status": "READY",
+        "matrix": [
+          [
+            "UNKNOWN"
+          ]
+        ],
+        "source": {
+          "body": "{\"schema\":\"semantic-flow-v1\",\"unit\":\"files\",\"supplies\":[{\"id\":\"unspecified\",\"quantity\":1,\"terms\":\"One illustration file is offered. Its format and whether it is a photograph or diagram are unspecified.\"}],\"demands\":[{\"id\":\"need_diagram\",\"quantity\":1,\"terms\":\"One SVG line diagram.\"}]}\n",
+          "hash": "b03fbcfa44bd17d239dcb3c256f38671665491ac5f730470543366b8a9a0910f",
+          "http": 200,
+          "status": "OK",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/ambiguous.json"
+        }
+      },
+      "root": "acd488e33b309b7285120ee155642b392479098a9b3085706d8ba3e9e3a4220a",
+      "verified": true
+    },
+    "bad-source-v2": {
+      "key": "32373e8ad80840ebf63c00d2d30076a7fa7df8d3289d783b0452b69e5e9bd80d",
+      "input_root": "f8fe7848730b61ad4a568bb9bf8dd14ff671c166da2bc542855e1cb54174555f",
+      "inputs": {
+        "contract": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+        "creator": "0x7a413BB4AB62E31d62d4cD9efC8C8a8Dae37FB42",
+        "nonce": "bad-source-v2",
+        "policy": "semantic-flow-envelope-v1",
+        "source": {
+          "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json"
+        }
+      },
+      "output": {
+        "demand_total": null,
+        "lower": null,
+        "status": "HELD",
+        "upper": null
+      },
+      "report": {
+        "binding": {
+          "input_root": "f8fe7848730b61ad4a568bb9bf8dd14ff671c166da2bc542855e1cb54174555f",
+          "key": "32373e8ad80840ebf63c00d2d30076a7fa7df8d3289d783b0452b69e5e9bd80d",
+          "policy": "semantic-flow-envelope-v1"
+        },
+        "document_status": "ACQUISITION_FAILED",
+        "matrix": [],
+        "source": {
+          "body": "{\"schema\":\"semantic-flow-v1\",\"unit\":\"files\",\"supplies\":[{\"id\":\"flex\",\"quantity\":1,\"terms\":\"One file: either a PNG photograph or an SVG line diagram. Either format can be selected for this unit.\"},{\"id\":\"photo\",\"quantity\":1,\"terms\":\"One PNG photograph only. SVG diagrams are not offered.\"}],\"demands\":[{\"id\":\"need_photo\",\"quantity\":1,\"terms\":\"One PNG photograph.\"},{\"id\":\"need_diagram\",\"quantity\":1,\"terms\":\"One SVG line diagram.\"}]}\n",
+          "hash": "a71fe5fec4e3faa8eb1afb9dfd9de67bb408bf92ece9ac1c0c2910cd012235d9",
+          "http": 200,
+          "status": "HASH_MISMATCH",
+          "url": "https://raw.githubusercontent.com/Al1ranger/semantic-flow-envelope/0709466f63e7c9d475ebeaf0b80c992a916cbb6b/examples/reroute.json"
+        }
+      },
+      "root": "a7173a90f9a2ec54167c07c0ad93d3aa78ced895d0c5fdf8e6d318c7689cff82",
+      "verified": true
+    }
+  },
+  "final_readback_verified": true,
+  "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+  "source": {
+    "address": "0x83d33b4b26E19BE63C7Ddd08462dc967f36833f6",
+    "source_match": true,
+    "sha256": "821ac44f0cc28e687f32ee164edef02b4cd1a136dc3dc61599914fe1a7ff1456"
+  },
+  "wrong_root_consumer_denied": true,
+  "expected_outcomes_matched": {
+    "reroute": true,
+    "bottleneck": true,
+    "ambiguous": true,
+    "bad": true
+  }
+}

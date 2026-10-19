@@ -27,7 +27,7 @@ async function tx(step,args,expected='SUCCESS',message){
 }
 async function analyze(name,fixture,bad=false){
  const path='examples/'+fixture+'.json',coordinate='Al1ranger/semantic-flow-envelope/'+proofs.fixture_commit+'/'+path;
- const args=[name,coordinate,bad?'0'.repeat(64):sha(fs.readFileSync(path))];
+ const args=[name,coordinate,bad?'f'.repeat(64):sha(fs.readFileSync(path))];
  const entry=await tx('analyze-'+name,['write',proofs.address,'analyze','--args',...args]);
  const key=digest({contract:proofs.address,creator:signer,nonce:name});
  if(!entry.committed){
@@ -44,7 +44,15 @@ try{
  const reroute=await analyze('reroute-v1','reroute');
  await analyze('bottleneck-v1','bottleneck');
  await analyze('ambiguous-v1','ambiguous');
- await analyze('bad-source-v1','reroute',true);
+ // Preserve the already-finalized initial all-numeric CLI argument rejection.
+ // Never re-send it. The alphabetic-hex mismatch below reaches acquisition.
+ const initial=proofs.transactions.find(t=>t.step==='analyze-bad-source-v1');
+ if(initial){
+  if(!initial.hash)throw Error('Initial failure has no known hash');
+  Object.assign(initial,await receipt(initial.hash,'ERROR','Invalid source specification'),
+   {verified:true,diagnosis:'All-numeric CLI digest rejected as invalid source specification; not an acquisition proof'});save();
+ }
+ await analyze('bad-source-v2','reroute',true);
  if(reroute){
   await tx('replay-nonce',['write',proofs.address,'analyze','--args',...reroute.args],'ERROR','Nonce used');
   if(!await denied(proofs.address,'assured_plan',[reroute.key,'0'.repeat(64)]))throw Error('Wrong-root consumer unguarded');
@@ -59,6 +67,6 @@ try{
  if(proofs.transactions.some(t=>!t.verified||t.broadcast_unknown))throw Error('Unverified transaction remains');
  proofs.source=await source(proofs.address);proofs.final_readback_verified=true;
  proofs.expected_outcomes_matched={reroute:proofs.runs['reroute-v1']?.output?.status==='TEXT_FEASIBLE',
-  bottleneck:proofs.runs['bottleneck-v1']?.output?.status==='TEXT_INFEASIBLE',ambiguous:proofs.runs['ambiguous-v1']?.output?.status==='AMBIGUOUS',bad:proofs.runs['bad-source-v1']?.output?.status==='HELD'};save();
+  bottleneck:proofs.runs['bottleneck-v1']?.output?.status==='TEXT_INFEASIBLE',ambiguous:proofs.runs['ambiguous-v1']?.output?.status==='AMBIGUOUS',bad:proofs.runs['bad-source-v2']?.output?.status==='HELD'};save();
  console.log(JSON.stringify({complete:true,address:proofs.address,outcomes:Object.fromEntries(Object.entries(proofs.runs).map(([k,v])=>[k,v.output?.status??'NO_COMMIT']))}));
 }catch{console.error('Sanitized proof workflow stopped; inspect recorded hashes/state before retry');process.exitCode=1;}

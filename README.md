@@ -65,6 +65,8 @@ npm run test:sdk
 
 Python tests include 1,296 ternary-matrix / quantity-profile cases against an independent exhaustive cut oracle, every unknown completion for 81 ternary 2×2 matrices, residual rerouting, source integrity, schema, replay, quota, root binding, consumer denial and the actual extracted validator callback. Direct mode executes only the leader; callback tests use isolated mocks. Neither replaces live validator consensus. A narrowly scoped Windows gltest open-temp-file cleanup shim does not suppress contract exceptions.
 
+Local suite: 38 Python tests, 3 Node tests, and 3 SDK calldata roundtrips. The compatibility model itself is not mocked in live demonstrations.
+
 ## Deploy and interact
 
 Use an encrypted dedicated test account and native keystore signing, never keys in source or environment files. StudioNet is gasless; do not fund it. Pin CLI version `genlayer@0.39.2`.
@@ -83,6 +85,8 @@ genlayer call ADDRESS assured_plan --args SNAPSHOT_KEY INPUT_ROOT
 ```
 
 Check `FINALIZED`, successful leader execution, agreeing consensus and committed snapshot; finalization alone is not success. Compare Explorer/RPC source with this exact contract. `node scripts/check.mjs source ADDRESS` compares normalized source; `node scripts/check.mjs state ADDRESS KEY` verifies roots, capacities, all cuts and consumer behavior.
+
+After fetching the published proof ledger, `node scripts/verify-live.mjs` independently rereads every receipt, checks sender/recipient, compares source and immutable roots, verifies flow/cut optimality, and tests consumer guards. This command is read-only and requires no wallet.
 
 `scripts/complete-proofs.mjs PUBLISHED_FIXTURE_COMMIT` deploys and executes the bounded demo serially using `FLOW_TEST_ACCOUNT` (an account name, not a key). It journals hashes before waiting, suppresses raw CLI/provider logs and refuses to rebroadcast uncertain outcomes. Resume a recorded hash by rerunning; no-hash ambiguity requires a history/nonce audit first. The process-local context adapter does not change global GenLayer configuration. Set `FLOW_CLI_PATH` if the locally installed CLI differs from the workspace default.
 
